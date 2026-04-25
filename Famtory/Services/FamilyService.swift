@@ -60,6 +60,17 @@ final class FamilyService {
         }
     }
 
+    func leaveFamily(userId: String, familyId: String) async throws {
+        let familyRef = db.collection("families").document(familyId)
+        let family = try await fetchFamily(id: familyId)
+        if family.memberIds.count <= 1 {
+            // 마지막 멤버면 가족 문서 전체 삭제
+            try await familyRef.delete()
+        } else {
+            try await familyRef.updateData(["memberIds": FieldValue.arrayRemove([userId])])
+        }
+    }
+
     private func generateCode() -> String {
         let chars = Array("ABCDEFGHJKLMNPQRSTUVWXYZ23456789")
         return String((0..<6).map { _ in chars.randomElement()! })

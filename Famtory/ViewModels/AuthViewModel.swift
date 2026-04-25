@@ -46,6 +46,26 @@ final class AuthViewModel: ObservableObject {
         currentUser = nil
     }
 
+    func deleteAccount(credential: ASAuthorizationAppleIDCredential) async {
+        guard let user = currentUser else { return }
+        isLoading = true
+        error = nil
+        do {
+            // 1. 가족 그룹에서 제거
+            if let familyId = user.familyId {
+                try await FamilyService.shared.leaveFamily(userId: user.safeId, familyId: familyId)
+            }
+            // 2. Firestore 유저 문서 삭제
+            try await db.collection("users").document(user.safeId).delete()
+            // 3. Firebase Auth 계정 삭제 (Apple 재인증 포함)
+            try await AuthService.shared.deleteAccount(credential: credential)
+            currentUser = nil
+        } catch {
+            self.error = error.localizedDescription
+        }
+        isLoading = false
+    }
+
 #if DEBUG
     func enterDebugMode() {
         var user = FamtoryUser(name: "햄스터맘")

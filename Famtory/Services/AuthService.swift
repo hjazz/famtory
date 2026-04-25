@@ -35,6 +35,23 @@ final class AuthService {
         try Auth.auth().signOut()
     }
 
+    func deleteAccount(credential: ASAuthorizationAppleIDCredential) async throws {
+        guard
+            let nonce = currentNonce,
+            let appleIDToken = credential.identityToken,
+            let idTokenString = String(data: appleIDToken, encoding: .utf8)
+        else { throw AuthError.invalidCredential }
+
+        let firebaseCredential = OAuthProvider.credential(
+            withProviderID: "apple.com",
+            idToken: idTokenString,
+            rawNonce: nonce
+        )
+        guard let user = Auth.auth().currentUser else { throw AuthError.notSignedIn }
+        try await user.reauthenticate(with: firebaseCredential)
+        try await user.delete()
+    }
+
     // MARK: - Helpers
     private func randomNonceString(length: Int = 32) -> String {
         let charset = Array("0123456789ABCDEFGHIJKLMNOPQRSTUVXYZabcdefghijklmnopqrstuvwxyz-._")
@@ -58,7 +75,14 @@ final class AuthService {
             .joined()
     }
 
-    enum AuthError: Error {
+    enum AuthError: LocalizedError {
         case invalidCredential
+        case notSignedIn
+        var errorDescription: String? {
+            switch self {
+            case .invalidCredential: return "인증 정보가 올바르지 않아요."
+            case .notSignedIn: return "로그인 상태가 아니에요."
+            }
+        }
     }
 }

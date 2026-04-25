@@ -1,9 +1,12 @@
 import SwiftUI
+import AuthenticationServices
 
 struct FamilyInfoView: View {
     @ObservedObject var familyVM: FamilyViewModel
     @EnvironmentObject var authVM: AuthViewModel
     @State private var showShare = false
+    @State private var showDeleteConfirm = false
+    @State private var showReauthSheet = false
 
     var body: some View {
         NavigationStack {
@@ -50,18 +53,42 @@ struct FamilyInfoView: View {
 
                     Spacer()
 
-                    Button(role: .destructive) {
-                        authVM.signOut()
-                    } label: {
-                        Text("로그아웃")
-                            .font(.famBody())
-                            .foregroundColor(.red.opacity(0.65))
+                    VStack(spacing: 16) {
+                        Button(role: .destructive) {
+                            authVM.signOut()
+                        } label: {
+                            Text("로그아웃")
+                                .font(.famBody())
+                                .foregroundColor(.red.opacity(0.65))
+                        }
+
+                        Button(role: .destructive) {
+                            showDeleteConfirm = true
+                        } label: {
+                            Text("계정 삭제")
+                                .font(.famCaption())
+                                .foregroundColor(.red.opacity(0.4))
+                        }
                     }
                     .padding(.bottom, 36)
                 }
             }
             .navigationTitle("우리 가족")
             .navigationBarTitleDisplayMode(.inline)
+            .confirmationDialog("계정을 삭제하면 모든 데이터가 영구적으로 삭제됩니다.", isPresented: $showDeleteConfirm, titleVisibility: .visible) {
+                Button("계정 삭제", role: .destructive) {
+                    showReauthSheet = true
+                }
+                Button("취소", role: .cancel) {}
+            }
+            .sheet(isPresented: $showReauthSheet) {
+                ReauthDeleteSheet { credential in
+                    showReauthSheet = false
+                    Task { await authVM.deleteAccount(credential: credential) }
+                }
+                .presentationDetents([.height(280)])
+                .presentationDragIndicator(.visible)
+            }
             .sheet(isPresented: $showShare) {
                 if let code = familyVM.family?.inviteCode {
                     ShareCodeSheet(code: code)
@@ -70,6 +97,43 @@ struct FamilyInfoView: View {
                 }
             }
         }
+    }
+}
+
+// MARK: - Reauth Delete sheet
+
+struct ReauthDeleteSheet: View {
+    let onCredential: (ASAuthorizationAppleIDCredential) -> Void
+
+    var body: some View {
+        VStack(spacing: 20) {
+            Text("계정 삭제 확인")
+                .font(.famTitle())
+                .foregroundColor(.famBrown)
+                .padding(.top, 28)
+
+            Text("본인 확인을 위해 Apple 로그인이 필요합니다")
+                .font(.famBody())
+                .foregroundColor(.famBrown.opacity(0.55))
+                .multilineTextAlignment(.center)
+                .padding(.horizontal)
+
+            SignInWithAppleButton(.continue) { request in
+                request.requestedScopes = []
+                request.nonce = AuthService.shared.prepareNonce()
+            } onCompletion: { result in
+                if case .success(let auth) = result,
+                   let credential = auth.credential as? ASAuthorizationAppleIDCredential {
+                    onCredential(credential)
+                }
+            }
+            .signInWithAppleButtonStyle(.black)
+            .frame(height: 50)
+            .clipShape(RoundedRectangle(cornerRadius: 14, style: .continuous))
+            .padding(.horizontal, 32)
+            .padding(.bottom, 20)
+        }
+        .frame(maxWidth: .infinity)
     }
 }
 
