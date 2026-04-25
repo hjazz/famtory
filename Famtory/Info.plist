@@ -20,8 +20,6 @@
 	<string>1</string>
 	<key>FirebaseAppDelegateProxyEnabled</key>
 	<false/>
-	<key>NSFaceIDUsageDescription</key>
-	<string>로그인을 위해 사용됩니다</string>
 	<key>UIBackgroundModes</key>
 	<array>
 		<string>remote-notification</string>
