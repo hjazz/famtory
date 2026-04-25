@@ -52,9 +52,12 @@ struct SignInView: View {
                             .foregroundColor(.red)
                     }
 
-                    Text("가입 시 개인정보 처리방침에 동의합니다")
-                        .font(.famCaption())
-                        .foregroundColor(.famBrown.opacity(0.35))
+                    Link(destination: URL(string: "https://hjazz.github.io/famtory/privacy-policy.html")!) {
+                        Text("가입 시 개인정보 처리방침에 동의합니다")
+                            .font(.famCaption())
+                            .foregroundColor(.famBrown.opacity(0.35))
+                            .underline()
+                    }
 
 #if DEBUG
                     Button("🐹 개발 모드로 진입") {
