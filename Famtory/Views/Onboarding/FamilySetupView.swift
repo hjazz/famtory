@@ -14,8 +14,11 @@ struct FamilySetupView: View {
                 Spacer()
 
                 VStack(spacing: 14) {
-                    Text("🐹🐹🐹")
-                        .font(.system(size: 64))
+                    Image("FamtoryLogo")
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 180)
+                        .blendMode(.multiply)
 
                     Text("우리 가족을 시작해요")
                         .font(.famTitle())
