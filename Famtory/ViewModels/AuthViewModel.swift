@@ -1,5 +1,6 @@
 import Foundation
 import AuthenticationServices
+import FirebaseCore
 import FirebaseAuth
 import FirebaseFirestore
 
