@@ -9,18 +9,10 @@ final class DiaryService {
 
     func writeEntry(familyId: String, userId: String, userName: String, userProfile: String?, content: String) async throws -> DiaryEntry {
         let today = DiaryEntry.todayString()
+        // userId + date 기반 결정론적 ID → 구조적으로 하루 1개 보장
+        let docId = "\(userId)_\(today)"
+        let ref = entriesRef(familyId).document(docId)
 
-        let existing = try await entriesRef(familyId)
-            .whereField("userId", isEqualTo: userId)
-            .whereField("date", isEqualTo: today)
-            .limit(to: 1)
-            .getDocuments()
-
-        guard existing.documents.isEmpty else {
-            throw DiaryError.alreadyWritten
-        }
-
-        let ref = entriesRef(familyId).document()
         let entry = DiaryEntry(
             userId: userId,
             userName: userName,
@@ -29,10 +21,35 @@ final class DiaryService {
             date: today,
             reactions: [:]
         )
-        try ref.setData(from: entry)
+
+        // 트랜잭션으로 원자적 체크 + 쓰기
+        try await db.runTransaction { [self] transaction, errorPointer in
+            let snapshot: DocumentSnapshot
+            do {
+                snapshot = try transaction.getDocument(ref)
+            } catch let fetchError as NSError {
+                errorPointer?.pointee = fetchError
+                return nil
+            }
+            guard !snapshot.exists else {
+                errorPointer?.pointee = NSError(
+                    domain: "DiaryService",
+                    code: 409,
+                    userInfo: [NSLocalizedDescriptionKey: DiaryError.alreadyWritten.errorDescription ?? ""]
+                )
+                return nil
+            }
+            do {
+                let data = try Firestore.Encoder().encode(entry)
+                transaction.setData(data, forDocument: ref)
+            } catch let encodeError as NSError {
+                errorPointer?.pointee = encodeError
+            }
+            return nil
+        }
 
         var saved = entry
-        saved.id = ref.documentID
+        saved.id = docId
         return saved
     }
 
