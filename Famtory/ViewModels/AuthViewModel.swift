@@ -48,7 +48,8 @@ final class AuthViewModel: ObservableObject {
     func enterDebugMode() {
         var user = FamtoryUser(name: "햄스터맘")
         user.id = "debug-uid-001"
-        user.familyId = "debug-family-001"   // nil 로 바꾸면 가입 화면으로 이동
+        user.profileType = "mom"             // nil 로 바꾸면 프로필 선택 화면으로 이동
+        user.familyId = "debug-family-001"   // nil 로 바꾸면 가족 설정 화면으로 이동
         currentUser = user
         isLoading = false
     }

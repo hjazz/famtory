@@ -7,7 +7,7 @@ final class DiaryService {
 
     private let db = Firestore.firestore()
 
-    func writeEntry(familyId: String, userId: String, userName: String, content: String) async throws -> DiaryEntry {
+    func writeEntry(familyId: String, userId: String, userName: String, userProfile: String?, content: String) async throws -> DiaryEntry {
         let today = DiaryEntry.todayString()
 
         let existing = try await entriesRef(familyId)
@@ -24,6 +24,7 @@ final class DiaryService {
         let entry = DiaryEntry(
             userId: userId,
             userName: userName,
+            userProfile: userProfile,
             content: content,
             date: today,
             reactions: [:]

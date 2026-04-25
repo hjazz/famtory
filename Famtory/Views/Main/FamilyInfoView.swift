@@ -15,7 +15,7 @@ struct FamilyInfoView: View {
 
                     // 가족 정보
                     VStack(spacing: 10) {
-                        Text("🐹🐹🐹").font(.system(size: 52))
+                        ProfileImageView(profileType: authVM.currentUser?.profileType, size: 80)
                         Text(familyVM.family?.name ?? "")
                             .font(.famTitle())
                             .foregroundColor(.famBrown)

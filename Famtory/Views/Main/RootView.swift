@@ -10,6 +10,8 @@ struct RootView: View {
                 SplashView()
             } else if authVM.currentUser == nil {
                 SignInView()
+            } else if authVM.currentUser?.profileType == nil {
+                ProfileSelectView()
             } else if let familyId = authVM.currentUser?.familyId {
                 MainTabView(familyVM: familyVM)
                     .task { await familyVM.loadFamily(id: familyId) }

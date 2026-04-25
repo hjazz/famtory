@@ -9,21 +9,11 @@ struct DiaryEntryCard: View {
 
     private let defaultEmojis = ["❤️", "😂", "😮", "👍", "🥰"]
 
-    private let avatarColors: [Color] = [
-        .famBlue.opacity(0.22), .famPink.opacity(0.22),
-        .famYellow.opacity(0.35), .famGreen.opacity(0.22)
-    ]
-
     var body: some View {
         VStack(alignment: .leading, spacing: 14) {
             // 작성자
             HStack(spacing: 10) {
-                ZStack {
-                    Circle()
-                        .fill(avatarColor(for: entry.userId))
-                        .frame(width: 42, height: 42)
-                    Text("🐹").font(.system(size: 22))
-                }
+                ProfileImageView(profileType: entry.userProfile, size: 42)
 
                 VStack(alignment: .leading, spacing: 2) {
                     Text(entry.userName)
@@ -91,10 +81,6 @@ struct DiaryEntryCard: View {
             guard !uids.isEmpty else { return nil }
             return (emoji: emoji, count: uids.count, mine: uids.contains(currentUserId))
         }.sorted { $0.count > $1.count }
-    }
-
-    private func avatarColor(for userId: String) -> Color {
-        avatarColors[abs(userId.hashValue) % avatarColors.count]
     }
 
     private var formattedTime: String {

@@ -19,12 +19,12 @@ final class HomeViewModel: ObservableObject {
         }
     }
 
-    func writeEntry(familyId: String, userId: String, userName: String, content: String) async {
+    func writeEntry(familyId: String, userId: String, userName: String, userProfile: String?, content: String) async {
         isLoading = true; error = nil
         do {
             _ = try await DiaryService.shared.writeEntry(
                 familyId: familyId, userId: userId,
-                userName: userName, content: content
+                userName: userName, userProfile: userProfile, content: content
             )
         } catch {
             self.error = error.localizedDescription

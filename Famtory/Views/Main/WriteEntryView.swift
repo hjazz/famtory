@@ -4,6 +4,7 @@ struct WriteEntryView: View {
     let familyId: String
     let userId: String
     let userName: String
+    let userProfile: String?
     @ObservedObject var homeVM: HomeViewModel
 
     @Environment(\.dismiss) private var dismiss
@@ -60,7 +61,7 @@ struct WriteEntryView: View {
                         Task {
                             await homeVM.writeEntry(
                                 familyId: familyId, userId: userId,
-                                userName: userName, content: content
+                                userName: userName, userProfile: userProfile, content: content
                             )
                             if homeVM.error == nil { dismiss() }
                         }

@@ -74,6 +74,7 @@ struct HomeView: View {
                 familyId: familyVM.family?.safeId ?? "",
                 userId: authVM.currentUser?.safeId ?? "",
                 userName: authVM.currentUser?.name ?? "",
+                userProfile: authVM.currentUser?.profileType,
                 homeVM: homeVM
             )
         }
