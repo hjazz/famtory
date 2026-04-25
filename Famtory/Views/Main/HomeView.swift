@@ -133,3 +133,8 @@ struct EmptyFeedView: View {
         .padding(.top, 60)
     }
 }
+
+#Preview("홈") {
+    HomeView(familyVM: .preview())
+        .environmentObject(AuthViewModel.preview())
+}

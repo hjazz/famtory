@@ -65,3 +65,8 @@ struct CreateFamilyView: View {
         }
     }
 }
+
+#Preview("가족 만들기") {
+    CreateFamilyView(familyVM: FamilyViewModel())
+        .environmentObject(AuthViewModel.preview(hasFamilyId: false))
+}

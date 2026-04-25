@@ -70,10 +70,16 @@ struct SignInView: View {
             }
         }
         .overlay {
+
             if authVM.isLoading {
                 Color.black.opacity(0.25).ignoresSafeArea()
                 ProgressView().tint(.white).scaleEffect(1.4)
             }
         }
     }
+}
+
+#Preview("로그인") {
+    SignInView()
+        .environmentObject(AuthViewModel.preview())
 }

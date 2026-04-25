@@ -114,3 +114,8 @@ struct ShareCodeSheet: View {
         }
     }
 }
+
+#Preview("가족 정보") {
+    FamilyInfoView(familyVM: .preview())
+        .environmentObject(AuthViewModel.preview())
+}

@@ -179,3 +179,8 @@ struct CalendarGridView: View {
         String(format: "%04d-%02d-%02d", year, month, day)
     }
 }
+
+#Preview("달력") {
+    CalendarView(familyVM: .preview())
+        .environmentObject(AuthViewModel.preview())
+}

@@ -93,3 +93,11 @@ struct WriteEntryView: View {
         }
     }
 }
+
+#Preview("일기 작성") {
+    WriteEntryView(familyId: "preview-family-001",
+                   userId: "preview-uid-001",
+                   userName: "햄스터맘",
+                   userProfile: "mom",
+                   homeVM: .preview())
+}

@@ -74,3 +74,8 @@ struct FamilySetupView: View {
         }
     }
 }
+
+#Preview("가족 설정") {
+    FamilySetupView()
+        .environmentObject(AuthViewModel.preview(hasFamilyId: false))
+}

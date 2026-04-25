@@ -31,3 +31,16 @@ struct ProfileImageView: View {
         }
     }
 }
+
+#Preview("프로필 이미지") {
+    HStack(spacing: 20) {
+        ForEach(["dad", "mom", "son", "daughter"], id: \.self) { type in
+            VStack(spacing: 8) {
+                ProfileImageView(profileType: type, size: 72)
+                Text(type).font(.famCaption())
+            }
+        }
+    }
+    .padding()
+    .background(Color.famBackground)
+}

@@ -35,3 +35,7 @@ struct EmojiPickerView: View {
         .background(Color.famCard)
     }
 }
+
+#Preview("이모지 피커") {
+    EmojiPickerView(emojis: ["❤️", "😂", "😮", "👍", "🥰"]) { _ in }
+}

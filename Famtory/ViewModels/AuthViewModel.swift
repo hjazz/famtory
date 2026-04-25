@@ -13,6 +13,7 @@ final class AuthViewModel: ObservableObject {
     private var authHandle: AuthStateDidChangeListenerHandle?
 
     init() {
+        guard FirebaseApp.app() != nil else { isLoading = false; return }
         authHandle = Auth.auth().addStateDidChangeListener { [weak self] _, user in
             Task { @MainActor in
                 if let user {

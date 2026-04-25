@@ -76,3 +76,8 @@ struct JoinFamilyView: View {
         }
     }
 }
+
+#Preview("초대 코드 참여") {
+    JoinFamilyView(familyVM: FamilyViewModel())
+        .environmentObject(AuthViewModel.preview(hasFamilyId: false))
+}

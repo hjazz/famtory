@@ -89,3 +89,8 @@ struct ProfileSelectView: View {
         isLoading = false
     }
 }
+
+#Preview("프로필 선택") {
+    ProfileSelectView()
+        .environmentObject(AuthViewModel.preview(profileType: nil, hasFamilyId: false))
+}

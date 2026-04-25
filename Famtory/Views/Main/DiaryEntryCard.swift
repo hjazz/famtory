@@ -91,3 +91,17 @@ struct DiaryEntryCard: View {
         return f.string(from: ts.dateValue())
     }
 }
+
+#Preview("일기 카드") {
+    VStack(spacing: 16) {
+        DiaryEntryCard(entry: .mock(userName: "햄스터파파", profileType: "dad",
+                                    content: "오늘 운동장을 500바퀴 돌았다 🐹"),
+                       currentUserId: "preview-uid-001", onReaction: { _ in })
+        DiaryEntryCard(entry: .mock(userName: "햄스터맘", profileType: "mom",
+                                    content: "씨앗 창고가 꽉 찼다! 행복해 🌰",
+                                    reactions: [:]),
+                       currentUserId: "preview-uid-001", onReaction: { _ in })
+    }
+    .padding()
+    .background(Color.famBackground)
+}
