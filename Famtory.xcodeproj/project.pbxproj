@@ -33,6 +33,7 @@
 		7531D7DA2E52D23ABE8D1AEF /* Family.swift in Sources */ = {isa = PBXBuildFile; fileRef = C7EB855B22BD807EF9C1CA4B /* Family.swift */; };
 		7C4BC7B658D5789F9D620689 /* FamilyService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 217E7C0F726DAC661EA7A00A /* FamilyService.swift */; };
 		7F6C5AB319CE17CF6650E05A /* WriteEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CCDFE37F78E6977D5F1CE8F2 /* WriteEntryView.swift */; };
+		85A32CC3EB9A93AAF352B5E9 /* CalendarViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1851232E08874D2B00AD8A70 /* CalendarViewModelTests.swift */; };
 		957E838BB82FB061B933D786 /* ProfileImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9A1218E9E12E79E3AB9DA512 /* ProfileImageView.swift */; };
 		97E7AF0549A7A1EB64006DED /* FamilyViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D0264EA1841FB144A4B754E /* FamilyViewModel.swift */; };
 		9A3596D24C71D4EE39219708 /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD4729AD2ECEBDD08623D47 /* AuthViewModel.swift */; };
@@ -41,6 +42,8 @@
 		A687543BBC51B69D46016B37 /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56C11EA45607C6F7A74FF437 /* HomeViewModel.swift */; };
 		B41FA481A14822570963A85E /* CalendarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4C31A8AE9F9C94B6C9D7587C /* CalendarView.swift */; };
 		C5E3B6899D8DF1015F20F453 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 7C2B2E2F8A5766C85609DFEC /* FirebaseAuth */; };
+		C98E7FE7071A8DEE3B2ADA9D /* AuthViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 29F209209937F600773AC5C3 /* AuthViewModelTests.swift */; };
+		CBA5FF1369F6AA46096DF5B1 /* FamilyViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2561989B776BAFFB4723E7 /* FamilyViewModelTests.swift */; };
 		D9B7B4A3FB17B699F67D504A /* FamilyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CC77F597378E7C8E081501 /* FamilyInfoView.swift */; };
 		E2176363A36D3FAAA74DA76F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EB6D574D01DF8B9BE7B0F3E7 /* FirebaseFirestore */; };
 		EA0E48A0624C87463134ADBB /* DiaryEntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8715007F3EDF638A6C74FF8 /* DiaryEntryTests.swift */; };
@@ -64,10 +67,12 @@
 		0762C336EB4FDD248048D7CD /* FamtoryUserTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamtoryUserTests.swift; sourceTree = "<group>"; };
 		0955674533A7DADCA261B418 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		10EC32D7EC6C44B7E393B3F3 /* EmojiPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPickerView.swift; sourceTree = "<group>"; };
+		1851232E08874D2B00AD8A70 /* CalendarViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModelTests.swift; sourceTree = "<group>"; };
 		1F975449216AFA298DBD2EC1 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		217E7C0F726DAC661EA7A00A /* FamilyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyService.swift; sourceTree = "<group>"; };
 		218E71F286C401FD8FC2D1F5 /* FamtoryTests.xctest */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.cfbundle; path = FamtoryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		257D2273AF42B4852A13AD25 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		29F209209937F600773AC5C3 /* AuthViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModelTests.swift; sourceTree = "<group>"; };
 		2A0B4F18BE056DE78C73EFE7 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		2D0264EA1841FB144A4B754E /* FamilyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyViewModel.swift; sourceTree = "<group>"; };
 		405D2528D93C7F1E509C7D03 /* FamtoryUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamtoryUser.swift; sourceTree = "<group>"; };
@@ -93,6 +98,7 @@
 		C271AF9D58803C96430D32C0 /* AuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthService.swift; sourceTree = "<group>"; };
 		C7EB855B22BD807EF9C1CA4B /* Family.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Family.swift; sourceTree = "<group>"; };
 		CCDFE37F78E6977D5F1CE8F2 /* WriteEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WriteEntryView.swift; sourceTree = "<group>"; };
+		CF2561989B776BAFFB4723E7 /* FamilyViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyViewModelTests.swift; sourceTree = "<group>"; };
 		DCF53503ADCA5D727120B06D /* FamtoryApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamtoryApp.swift; sourceTree = "<group>"; };
 		DD16C02B4F0B04883E78119D /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		DD32E236D19BD2109B0A503C /* DiaryEntryCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiaryEntryCard.swift; sourceTree = "<group>"; };
@@ -158,6 +164,9 @@
 		426F69EDE2ACD8FE2E6EC7A5 /* ViewModels */ = {
 			isa = PBXGroup;
 			children = (
+				29F209209937F600773AC5C3 /* AuthViewModelTests.swift */,
+				1851232E08874D2B00AD8A70 /* CalendarViewModelTests.swift */,
+				CF2561989B776BAFFB4723E7 /* FamilyViewModelTests.swift */,
 				665D93BCB855BC8C6AA8DDD3 /* HomeViewModelTests.swift */,
 			);
 			path = ViewModels;
@@ -405,8 +414,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C98E7FE7071A8DEE3B2ADA9D /* AuthViewModelTests.swift in Sources */,
+				85A32CC3EB9A93AAF352B5E9 /* CalendarViewModelTests.swift in Sources */,
 				EA0E48A0624C87463134ADBB /* DiaryEntryTests.swift in Sources */,
 				27E079D4611B995B10761DDC /* FamilyTests.swift in Sources */,
+				CBA5FF1369F6AA46096DF5B1 /* FamilyViewModelTests.swift in Sources */,
 				19C196B13FFA6F7BE93C945F /* FamtoryUserTests.swift in Sources */,
 				0DBCE28D1058231C8A818F7C /* HomeViewModelTests.swift in Sources */,
 			);

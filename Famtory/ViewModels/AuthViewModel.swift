@@ -53,13 +53,17 @@ final class AuthViewModel: ObservableObject {
         isLoading = true
         error = nil
         do {
-            // 1. 가족 그룹에서 제거
+            // 1. 내 일기 전체 삭제 (개인정보 파기 의무)
+            if let familyId = user.familyId {
+                try await deleteUserEntries(userId: user.safeId, familyId: familyId)
+            }
+            // 2. 가족 그룹에서 제거
             if let familyId = user.familyId {
                 try await FamilyService.shared.leaveFamily(userId: user.safeId, familyId: familyId)
             }
-            // 2. Firestore 유저 문서 삭제
+            // 3. Firestore 유저 문서 삭제
             try await db.collection("users").document(user.safeId).delete()
-            // 3. Firebase Auth 계정 삭제 (Apple 재인증 포함)
+            // 4. Firebase Auth 계정 삭제 (Apple 재인증 포함)
             try await AuthService.shared.deleteAccount(credential: credential)
             currentUser = nil
         } catch {
@@ -102,6 +106,17 @@ final class AuthViewModel: ObservableObject {
     }
 
     // MARK: - Private
+
+    private func deleteUserEntries(userId: String, familyId: String) async throws {
+        let snapshot = try await db
+            .collection("families").document(familyId)
+            .collection("entries")
+            .whereField("userId", isEqualTo: userId)
+            .getDocuments()
+        let batch = db.batch()
+        snapshot.documents.forEach { batch.deleteDocument($0.reference) }
+        try await batch.commit()
+    }
 
     private func loadOrCreateUser(uid: String, displayName: String?) async {
         do {
