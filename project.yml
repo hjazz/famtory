@@ -14,6 +14,22 @@ packages:
     url: https://github.com/google/GoogleSignIn-iOS
     from: "8.0.0"
 
+schemes:
+  Famtory:
+    build:
+      targets:
+        Famtory: all
+    run:
+      config: Debug
+    test:
+      config: Debug
+    profile:
+      config: Release
+    analyze:
+      config: Debug
+    archive:
+      config: Release
+
 targets:
   Famtory:
     type: application
