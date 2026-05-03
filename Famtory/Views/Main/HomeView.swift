@@ -84,6 +84,12 @@ struct HomeView: View {
             else { return }
             homeVM.startStream(familyId: fid, userId: uid)
         }
+        .onChange(of: familyVM.family?.safeId) { _, newFamilyId in
+            guard let fid = newFamilyId,
+                  let uid = authVM.currentUser?.safeId
+            else { return }
+            homeVM.startStream(familyId: fid, userId: uid)
+        }
     }
 }
 
