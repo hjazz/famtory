@@ -149,6 +149,15 @@ final class XxxService {
 
 ---
 
+## XcodeGen 규칙
+
+- Swift 파일을 **추가하거나 삭제**할 때마다 반드시 `xcodegen generate`를 실행한다.
+- `project.yml`을 수정한 경우에도 동일하게 실행한다.
+- 실행 명령: `xcodegen generate` (프로젝트 루트에서)
+- xcodegen이 없으면: `brew install xcodegen`
+
+---
+
 ## 새 화면/기능 추가 체크리스트
 
 - [ ] `Models/` — 구조체 정의 (`Codable`, `Identifiable`, `safeId`)
