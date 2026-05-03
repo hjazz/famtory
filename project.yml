@@ -79,8 +79,6 @@ targets:
       - path: FamtoryTests
     dependencies:
       - target: Famtory
-      - package: Firebase
-        product: FirebaseFirestore
     settings:
       base:
         SWIFT_VERSION: "5.9"

@@ -27,7 +27,6 @@
 		5ECB23F2AAEAA99F4BE79B64 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0955674533A7DADCA261B418 /* AppDelegate.swift */; };
 		5F93F8FC3BF3B73964AD54E6 /* CalendarViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 862A0D990EA095AF7DD54A99 /* CalendarViewModel.swift */; };
 		688A8B28A3B5942D86F39A42 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 005F806775F5B8084988F9C2 /* GoogleService-Info.plist */; };
-		6A2FF833C308FFD4FA4F2AEC /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 5A423A9FBD03C76DF5583BA3 /* FirebaseFirestore */; };
 		6D82DAD26CD22647A573532A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A0A68500839F8981F4587CAA /* Assets.xcassets */; };
 		70B58E28008FDA08B6F5224C /* CreateFamilyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B18FAFCFF8F97B630AF194 /* CreateFamilyView.swift */; };
 		7114BCE441F446B468EBCB43 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DD16C02B4F0B04883E78119D /* HomeView.swift */; };
@@ -103,14 +102,6 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		4E2555A35EF83031250DEDCF /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				6A2FF833C308FFD4FA4F2AEC /* FirebaseFirestore in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		9055817A37FAA432444F6BC7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -291,7 +282,6 @@
 			buildConfigurationList = 6BF35F84088F6BADA992ADFB /* Build configuration list for PBXNativeTarget "FamtoryTests" */;
 			buildPhases = (
 				747B57923143ED6AC5772967 /* Sources */,
-				4E2555A35EF83031250DEDCF /* Frameworks */,
 			);
 			buildRules = (
 			);
@@ -300,7 +290,6 @@
 			);
 			name = FamtoryTests;
 			packageProductDependencies = (
-				5A423A9FBD03C76DF5583BA3 /* FirebaseFirestore */,
 			);
 			productName = FamtoryTests;
 			productReference = 218E71F286C401FD8FC2D1F5 /* FamtoryTests.xctest */;
@@ -685,11 +674,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 89A87741D2396C21158EAFA4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
 			productName = FirebaseMessaging;
-		};
-		5A423A9FBD03C76DF5583BA3 /* FirebaseFirestore */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = 89A87741D2396C21158EAFA4 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
-			productName = FirebaseFirestore;
 		};
 		7B4A2A9DEA4F3CF571BE23C4 /* GoogleSignInSwift */ = {
 			isa = XCSwiftPackageProductDependency;
