@@ -10,6 +10,9 @@ packages:
   Firebase:
     url: https://github.com/firebase/firebase-ios-sdk
     from: "11.0.0"
+  GoogleSignIn:
+    url: https://github.com/google/GoogleSignIn-iOS
+    from: "8.0.0"
 
 targets:
   Famtory:
@@ -33,6 +36,10 @@ targets:
         product: FirebaseFirestore
       - package: Firebase
         product: FirebaseMessaging
+      - package: GoogleSignIn
+        product: GoogleSignIn
+      - package: GoogleSignIn
+        product: GoogleSignInSwift
     info:
       path: Famtory/Info.plist
       properties:
@@ -42,3 +49,6 @@ targets:
         FirebaseAppDelegateProxyEnabled: false
         UIBackgroundModes:
           - remote-notification
+        CFBundleURLTypes:
+          - CFBundleURLSchemes:
+              - com.googleusercontent.apps.362347200012-su9doq4mjdts54semrar3riaoced0qj8

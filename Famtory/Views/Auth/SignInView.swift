@@ -26,8 +26,10 @@ struct SignInView: View {
 
                 Spacer()
 
-                // Apple Sign In
+                // 로그인 버튼 영역
                 VStack(spacing: 12) {
+
+                    // Apple Sign In
                     SignInWithAppleButton(.signIn) { request in
                         request.requestedScopes = [.fullName, .email]
                         request.nonce = AuthService.shared.prepareNonce()
@@ -44,6 +46,27 @@ struct SignInView: View {
                     .signInWithAppleButtonStyle(.black)
                     .frame(height: 54)
                     .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                    .padding(.horizontal, 32)
+
+                    // Google Sign In
+                    Button {
+                        Task { await authVM.handleGoogleSignIn() }
+                    } label: {
+                        HStack(spacing: 10) {
+                            Image("google_logo")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 20, height: 20)
+                            Text("Google로 계속하기")
+                                .font(.famHeadline())
+                                .foregroundColor(.famBrown)
+                        }
+                        .frame(maxWidth: .infinity)
+                        .frame(height: 54)
+                        .background(Color.white)
+                        .clipShape(RoundedRectangle(cornerRadius: 16, style: .continuous))
+                        .shadow(color: .black.opacity(0.08), radius: 4, x: 0, y: 2)
+                    }
                     .padding(.horizontal, 32)
 
                     if let error = authVM.error {
@@ -73,7 +96,6 @@ struct SignInView: View {
             }
         }
         .overlay {
-
             if authVM.isLoading {
                 Color.black.opacity(0.25).ignoresSafeArea()
                 ProgressView().tint(.white).scaleEffect(1.4)

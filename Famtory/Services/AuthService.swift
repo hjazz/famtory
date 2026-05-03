@@ -1,7 +1,10 @@
 import Foundation
 import AuthenticationServices
 import FirebaseAuth
+import FirebaseCore
+import GoogleSignIn
 import CryptoKit
+import UIKit
 
 @MainActor
 final class AuthService {
@@ -31,7 +34,24 @@ final class AuthService {
         return try await Auth.auth().signIn(with: firebaseCredential)
     }
 
+    func signInWithGoogle(presenting viewController: UIViewController) async throws -> AuthDataResult {
+        guard let clientID = FirebaseApp.app()?.options.clientID else {
+            throw AuthError.invalidCredential
+        }
+        GIDSignIn.sharedInstance.configuration = GIDConfiguration(clientID: clientID)
+        let result = try await GIDSignIn.sharedInstance.signIn(withPresenting: viewController)
+        guard let idToken = result.user.idToken?.tokenString else {
+            throw AuthError.invalidCredential
+        }
+        let credential = GoogleAuthProvider.credential(
+            withIDToken: idToken,
+            accessToken: result.user.accessToken.tokenString
+        )
+        return try await Auth.auth().signIn(with: credential)
+    }
+
     func signOut() throws {
+        GIDSignIn.sharedInstance.signOut()
         try Auth.auth().signOut()
     }
 

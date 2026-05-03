@@ -2,6 +2,7 @@ import UIKit
 import Firebase
 import FirebaseMessaging
 import UserNotifications
+import GoogleSignIn
 
 class AppDelegate: NSObject, UIApplicationDelegate {
     func application(
@@ -16,6 +17,10 @@ class AppDelegate: NSObject, UIApplicationDelegate {
         application.registerForRemoteNotifications()
 
         return true
+    }
+
+    func application(_ app: UIApplication, open url: URL, options: [UIApplication.OpenURLOptionsKey: Any] = [:]) -> Bool {
+        return GIDSignIn.sharedInstance.handle(url)
     }
 
     func application(
