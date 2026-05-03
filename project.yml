@@ -19,9 +19,12 @@ schemes:
     build:
       targets:
         Famtory: all
+        FamtoryTests: [test]
     run:
       config: Debug
     test:
+      targets:
+        - FamtoryTests
       config: Debug
     profile:
       config: Release
@@ -68,3 +71,16 @@ targets:
         CFBundleURLTypes:
           - CFBundleURLSchemes:
               - com.googleusercontent.apps.362347200012-su9doq4mjdts54semrar3riaoced0qj8
+
+  FamtoryTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: FamtoryTests
+    dependencies:
+      - target: Famtory
+      - package: Firebase
+        product: FirebaseFirestore
+    settings:
+      base:
+        SWIFT_VERSION: "5.9"
