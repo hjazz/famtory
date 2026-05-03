@@ -69,11 +69,30 @@ struct EditProfileView: View {
 
     private func save() async {
         let trimmed = name.trimmingCharacters(in: .whitespaces)
-        guard !trimmed.isEmpty, let uid = authVM.currentUser?.safeId else { return }
+        guard !trimmed.isEmpty,
+              let uid = authVM.currentUser?.safeId,
+              let familyId = authVM.currentUser?.familyId
+        else { return }
+
         isLoading = true
+        let db = Firestore.firestore()
         do {
-            try await Firestore.firestore().collection("users").document(uid)
+            // 1. 유저 이름 업데이트
+            try await db.collection("users").document(uid)
                 .updateData(["name": trimmed])
+
+            // 2. 기존 일기 userName 일괄 업데이트
+            let entries = try await db.collection("families").document(familyId)
+                .collection("entries")
+                .whereField("userId", isEqualTo: uid)
+                .getDocuments()
+
+            let batch = db.batch()
+            for doc in entries.documents {
+                batch.updateData(["userName": trimmed], forDocument: doc.reference)
+            }
+            try await batch.commit()
+
             await authVM.refreshUser()
             dismiss()
         } catch {
