@@ -7,6 +7,7 @@ struct FamilyInfoView: View {
     @State private var showShare = false
     @State private var showDeleteConfirm = false
     @State private var showReauthSheet = false
+    @State private var showEditName = false
 
     var body: some View {
         NavigationStack {
@@ -16,15 +17,28 @@ struct FamilyInfoView: View {
                 VStack(spacing: 24) {
                     Spacer()
 
-                    // 가족 정보
+                    // 프로필
                     VStack(spacing: 10) {
                         ProfileImageView(profileType: authVM.currentUser?.profileType, size: 80)
+
+                        Button { showEditName = true } label: {
+                            HStack(spacing: 4) {
+                                Text(authVM.currentUser?.name ?? "")
+                                    .font(.famTitle())
+                                    .foregroundColor(.famBrown)
+                                Image(systemName: "pencil")
+                                    .font(.system(size: 14))
+                                    .foregroundColor(.famBrown.opacity(0.4))
+                            }
+                        }
+                        .buttonStyle(.plain)
+
                         Text(familyVM.family?.name ?? "")
-                            .font(.famTitle())
-                            .foregroundColor(.famBrown)
-                        Text("멤버 \(familyVM.family?.memberIds.count ?? 0)명")
                             .font(.famCaption())
                             .foregroundColor(.famBrown.opacity(0.45))
+                        Text("멤버 \(familyVM.family?.memberIds.count ?? 0)명")
+                            .font(.famCaption())
+                            .foregroundColor(.famBrown.opacity(0.35))
                     }
 
                     // 초대 코드 카드
@@ -80,6 +94,11 @@ struct FamilyInfoView: View {
                     showReauthSheet = true
                 }
                 Button("취소", role: .cancel) {}
+            }
+            .sheet(isPresented: $showEditName) {
+                EditProfileView()
+                    .presentationDetents([.medium])
+                    .presentationDragIndicator(.visible)
             }
             .sheet(isPresented: $showReauthSheet) {
                 ReauthDeleteSheet { credential in

@@ -41,6 +41,7 @@
 		D9B7B4A3FB17B699F67D504A /* FamilyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CC77F597378E7C8E081501 /* FamilyInfoView.swift */; };
 		E2176363A36D3FAAA74DA76F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EB6D574D01DF8B9BE7B0F3E7 /* FirebaseFirestore */; };
 		EAB5FB85BC494765C1B63663 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7B4A2A9DEA4F3CF571BE23C4 /* GoogleSignInSwift */; };
+		F1CA3D8D856FD63A2F4CD456 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257D2273AF42B4852A13AD25 /* EditProfileView.swift */; };
 		FFC9C657D6568B8DF451DEB1 /* ProfileSelectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4464A72B5CBB90CD2D89ACC7 /* ProfileSelectView.swift */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +51,7 @@
 		10EC32D7EC6C44B7E393B3F3 /* EmojiPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmojiPickerView.swift; sourceTree = "<group>"; };
 		1F975449216AFA298DBD2EC1 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
 		217E7C0F726DAC661EA7A00A /* FamilyService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyService.swift; sourceTree = "<group>"; };
+		257D2273AF42B4852A13AD25 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		2A0B4F18BE056DE78C73EFE7 /* SignInView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignInView.swift; sourceTree = "<group>"; };
 		2D0264EA1841FB144A4B754E /* FamilyViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamilyViewModel.swift; sourceTree = "<group>"; };
 		405D2528D93C7F1E509C7D03 /* FamtoryUser.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FamtoryUser.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 			children = (
 				4C31A8AE9F9C94B6C9D7587C /* CalendarView.swift */,
 				DD32E236D19BD2109B0A503C /* DiaryEntryCard.swift */,
+				257D2273AF42B4852A13AD25 /* EditProfileView.swift */,
 				68CC77F597378E7C8E081501 /* FamilyInfoView.swift */,
 				DD16C02B4F0B04883E78119D /* HomeView.swift */,
 				1F975449216AFA298DBD2EC1 /* RootView.swift */,
@@ -309,6 +312,7 @@
 				9B0A52B76A556351E5668D0F /* DiaryEntry.swift in Sources */,
 				475736DF11946B369549C08C /* DiaryEntryCard.swift in Sources */,
 				2313C61CCA19844E0D217B99 /* DiaryService.swift in Sources */,
+				F1CA3D8D856FD63A2F4CD456 /* EditProfileView.swift in Sources */,
 				3CEEBC2AD6706658E741B647 /* EmojiPickerView.swift in Sources */,
 				7531D7DA2E52D23ABE8D1AEF /* Family.swift in Sources */,
 				D9B7B4A3FB17B699F67D504A /* FamilyInfoView.swift in Sources */,
