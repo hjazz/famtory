@@ -1,4 +1,5 @@
 import Testing
+import Foundation
 @testable import Famtory
 
 @Suite("Family 모델")
