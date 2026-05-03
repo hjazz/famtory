@@ -75,20 +75,23 @@ struct HomeView: View {
                 userId: authVM.currentUser?.safeId ?? "",
                 userName: authVM.currentUser?.name ?? "",
                 userProfile: authVM.currentUser?.profileType,
+                inviteCode: familyVM.family?.inviteCode ?? "",
                 homeVM: homeVM
             )
         }
         .task {
             guard let fid = familyVM.family?.safeId,
-                  let uid = authVM.currentUser?.safeId
+                  let uid = authVM.currentUser?.safeId,
+                  let code = familyVM.family?.inviteCode
             else { return }
-            homeVM.startStream(familyId: fid, userId: uid)
+            homeVM.startStream(familyId: fid, userId: uid, inviteCode: code)
         }
         .onChange(of: familyVM.family?.safeId) { _, newFamilyId in
             guard let fid = newFamilyId,
-                  let uid = authVM.currentUser?.safeId
+                  let uid = authVM.currentUser?.safeId,
+                  let code = familyVM.family?.inviteCode
             else { return }
-            homeVM.startStream(familyId: fid, userId: uid)
+            homeVM.startStream(familyId: fid, userId: uid, inviteCode: code)
         }
     }
 }

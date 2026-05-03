@@ -46,6 +46,7 @@
 		CBA5FF1369F6AA46096DF5B1 /* FamilyViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CF2561989B776BAFFB4723E7 /* FamilyViewModelTests.swift */; };
 		D9B7B4A3FB17B699F67D504A /* FamilyInfoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 68CC77F597378E7C8E081501 /* FamilyInfoView.swift */; };
 		E2176363A36D3FAAA74DA76F /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = EB6D574D01DF8B9BE7B0F3E7 /* FirebaseFirestore */; };
+		E531B4C4662294765493E9DA /* CryptoUtils.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8688FB8B2228FBDD50907AA2 /* CryptoUtils.swift */; };
 		EA0E48A0624C87463134ADBB /* DiaryEntryTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = F8715007F3EDF638A6C74FF8 /* DiaryEntryTests.swift */; };
 		EAB5FB85BC494765C1B63663 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 7B4A2A9DEA4F3CF571BE23C4 /* GoogleSignInSwift */; };
 		F1CA3D8D856FD63A2F4CD456 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 257D2273AF42B4852A13AD25 /* EditProfileView.swift */; };
@@ -87,6 +88,7 @@
 		7C668F4805FC156C7A6F3E6D /* PreviewHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PreviewHelpers.swift; sourceTree = "<group>"; };
 		7C7C6F554D814D281B13663B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		862A0D990EA095AF7DD54A99 /* CalendarViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarViewModel.swift; sourceTree = "<group>"; };
+		8688FB8B2228FBDD50907AA2 /* CryptoUtils.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CryptoUtils.swift; sourceTree = "<group>"; };
 		93BFC7187025465B3761C2DD /* JoinFamilyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JoinFamilyView.swift; sourceTree = "<group>"; };
 		940DEEE02C3FB085B87D80D4 /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
 		96C46CB52AE593FA0E52A3ED /* Famtory.app */ = {isa = PBXFileReference; includeInIndex = 0; lastKnownFileType = wrapper.application; path = Famtory.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -235,6 +237,7 @@
 			isa = PBXGroup;
 			children = (
 				C271AF9D58803C96430D32C0 /* AuthService.swift */,
+				8688FB8B2228FBDD50907AA2 /* CryptoUtils.swift */,
 				E5AC943D8B26487C0E351082 /* DiaryService.swift */,
 				217E7C0F726DAC661EA7A00A /* FamilyService.swift */,
 				940DEEE02C3FB085B87D80D4 /* NotificationService.swift */,
@@ -384,6 +387,7 @@
 				B41FA481A14822570963A85E /* CalendarView.swift in Sources */,
 				5F93F8FC3BF3B73964AD54E6 /* CalendarViewModel.swift in Sources */,
 				70B58E28008FDA08B6F5224C /* CreateFamilyView.swift in Sources */,
+				E531B4C4662294765493E9DA /* CryptoUtils.swift in Sources */,
 				43405B529E9A999085E0A16D /* DesignSystem.swift in Sources */,
 				9B0A52B76A556351E5668D0F /* DiaryEntry.swift in Sources */,
 				475736DF11946B369549C08C /* DiaryEntryCard.swift in Sources */,

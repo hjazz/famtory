@@ -14,7 +14,12 @@ struct CalendarView: View {
                     // 월 네비게이션
                     HStack {
                         Button {
-                            Task { if let id = familyVM.family?.safeId { await calVM.previousMonth(familyId: id) } }
+                            Task {
+                                if let id = familyVM.family?.safeId,
+                                   let code = familyVM.family?.inviteCode {
+                                    await calVM.previousMonth(familyId: id, inviteCode: code)
+                                }
+                            }
                         } label: {
                             Image(systemName: "chevron.left")
                                 .foregroundColor(.famBrown)
@@ -30,7 +35,12 @@ struct CalendarView: View {
                         Spacer()
 
                         Button {
-                            Task { if let id = familyVM.family?.safeId { await calVM.nextMonth(familyId: id) } }
+                            Task {
+                                if let id = familyVM.family?.safeId,
+                                   let code = familyVM.family?.inviteCode {
+                                    await calVM.nextMonth(familyId: id, inviteCode: code)
+                                }
+                            }
                         } label: {
                             Image(systemName: "chevron.right")
                                 .foregroundColor(.famBrown)
@@ -91,7 +101,10 @@ struct CalendarView: View {
             .navigationTitle("달력")
             .navigationBarTitleDisplayMode(.inline)
             .task {
-                if let id = familyVM.family?.safeId { await calVM.loadMonth(familyId: id) }
+                if let id = familyVM.family?.safeId,
+                   let code = familyVM.family?.inviteCode {
+                    await calVM.loadMonth(familyId: id, inviteCode: code)
+                }
             }
         }
     }

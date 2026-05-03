@@ -5,6 +5,7 @@ struct WriteEntryView: View {
     let userId: String
     let userName: String
     let userProfile: String?
+    let inviteCode: String
     @ObservedObject var homeVM: HomeViewModel
 
     @Environment(\.dismiss) private var dismiss
@@ -61,7 +62,8 @@ struct WriteEntryView: View {
                         Task {
                             await homeVM.writeEntry(
                                 familyId: familyId, userId: userId,
-                                userName: userName, userProfile: userProfile, content: content
+                                userName: userName, userProfile: userProfile,
+                                content: content, inviteCode: inviteCode
                             )
                             if homeVM.error == nil { dismiss() }
                         }
@@ -99,5 +101,6 @@ struct WriteEntryView: View {
                    userId: "preview-uid-001",
                    userName: "햄스터맘",
                    userProfile: "mom",
+                   inviteCode: "ABC123",
                    homeVM: .preview())
 }

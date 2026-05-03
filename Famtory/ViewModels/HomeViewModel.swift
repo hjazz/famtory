@@ -9,22 +9,37 @@ final class HomeViewModel: ObservableObject {
 
     private var streamTask: Task<Void, Never>?
 
-    func startStream(familyId: String, userId: String) {
+    func startStream(familyId: String, userId: String, inviteCode: String) {
         streamTask?.cancel()
         streamTask = Task {
-            for await entries in DiaryService.shared.streamEntries(familyId: familyId, date: DiaryEntry.todayString()) {
+            for await entries in DiaryService.shared.streamEntries(
+                familyId: familyId,
+                inviteCode: inviteCode,
+                date: DiaryEntry.todayString()
+            ) {
                 self.todayEntries = entries
                 self.myTodayEntry = entries.first { $0.userId == userId }
             }
         }
     }
 
-    func writeEntry(familyId: String, userId: String, userName: String, userProfile: String?, content: String) async {
+    func writeEntry(
+        familyId: String,
+        userId: String,
+        userName: String,
+        userProfile: String?,
+        content: String,
+        inviteCode: String
+    ) async {
         isLoading = true; error = nil
         do {
             _ = try await DiaryService.shared.writeEntry(
-                familyId: familyId, userId: userId,
-                userName: userName, userProfile: userProfile, content: content
+                familyId: familyId,
+                userId: userId,
+                userName: userName,
+                userProfile: userProfile,
+                content: content,
+                inviteCode: inviteCode
             )
         } catch {
             self.error = error.localizedDescription

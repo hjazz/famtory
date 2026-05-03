@@ -7,17 +7,25 @@ final class DiaryService {
 
     private let db = Firestore.firestore()
 
-    func writeEntry(familyId: String, userId: String, userName: String, userProfile: String?, content: String) async throws -> DiaryEntry {
+    func writeEntry(
+        familyId: String,
+        userId: String,
+        userName: String,
+        userProfile: String?,
+        content: String,
+        inviteCode: String
+    ) async throws -> DiaryEntry {
         let today = DiaryEntry.todayString()
-        // userId + date 기반 결정론적 ID → 구조적으로 하루 1개 보장
         let docId = "\(userId)_\(today)"
-        let ref = entriesRef(familyId).document(docId)
+        let ref   = entriesRef(familyId).document(docId)
+
+        let encryptedContent = try CryptoUtils.encrypt(content, inviteCode: inviteCode)
 
         let entry = DiaryEntry(
             userId: userId,
             userName: userName,
             userProfile: userProfile,
-            content: content,
+            content: encryptedContent,
             date: today,
             reactions: [:]
         )
@@ -49,7 +57,8 @@ final class DiaryService {
         }
 
         var saved = entry
-        saved.id = docId
+        saved.id  = docId
+        saved.content = content  // 반환값은 복호화된 원문
         return saved
     }
 
@@ -57,7 +66,7 @@ final class DiaryService {
         let ref = entriesRef(familyId).document(entryId)
         let doc = try await ref.getDocument()
         let reactions = doc.data()?["reactions"] as? [String: [String]] ?? [:]
-        let existing = reactions[emoji] ?? []
+        let existing  = reactions[emoji] ?? []
 
         if existing.contains(userId) {
             try await ref.updateData(["reactions.\(emoji)": FieldValue.arrayRemove([userId])])
@@ -66,7 +75,7 @@ final class DiaryService {
         }
     }
 
-    func streamEntries(familyId: String, date: String? = nil) -> AsyncStream<[DiaryEntry]> {
+    func streamEntries(familyId: String, inviteCode: String, date: String? = nil) -> AsyncStream<[DiaryEntry]> {
         AsyncStream { continuation in
             var query: Query = self.entriesRef(familyId)
                 .order(by: "createdAt", descending: false)
@@ -74,14 +83,19 @@ final class DiaryService {
             if let date { query = query.whereField("date", isEqualTo: date) }
 
             let listener = query.addSnapshotListener { snapshot, _ in
-                let entries = snapshot?.documents.compactMap { try? $0.data(as: DiaryEntry.self) } ?? []
+                let entries = (snapshot?.documents.compactMap { try? $0.data(as: DiaryEntry.self) } ?? [])
+                    .map { entry -> DiaryEntry in
+                        var e = entry
+                        e.content = CryptoUtils.decrypt(e.content, inviteCode: inviteCode)
+                        return e
+                    }
                 continuation.yield(entries)
             }
             continuation.onTermination = { _ in listener.remove() }
         }
     }
 
-    func fetchMonthEntries(familyId: String, year: Int, month: Int) async throws -> [DiaryEntry] {
+    func fetchMonthEntries(familyId: String, year: Int, month: Int, inviteCode: String) async throws -> [DiaryEntry] {
         let start = String(format: "%04d-%02d-01", year, month)
         let end   = String(format: "%04d-%02d-31", year, month)
 
@@ -90,7 +104,13 @@ final class DiaryService {
             .whereField("date", isLessThanOrEqualTo: end)
             .getDocuments()
 
-        return snapshot.documents.compactMap { try? $0.data(as: DiaryEntry.self) }
+        return snapshot.documents
+            .compactMap { try? $0.data(as: DiaryEntry.self) }
+            .map { entry -> DiaryEntry in
+                var e = entry
+                e.content = CryptoUtils.decrypt(e.content, inviteCode: inviteCode)
+                return e
+            }
     }
 
     private func entriesRef(_ familyId: String) -> CollectionReference {

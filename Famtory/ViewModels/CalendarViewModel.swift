@@ -14,10 +14,11 @@ final class CalendarViewModel: ObservableObject {
         currentMonth = comps.month!
     }
 
-    func loadMonth(familyId: String) async {
+    func loadMonth(familyId: String, inviteCode: String) async {
         do {
             entries = try await DiaryService.shared.fetchMonthEntries(
-                familyId: familyId, year: currentYear, month: currentMonth
+                familyId: familyId, year: currentYear, month: currentMonth,
+                inviteCode: inviteCode
             )
             if let selected = selectedDate { selectDate(selected) }
         } catch {}
@@ -32,15 +33,15 @@ final class CalendarViewModel: ObservableObject {
         Set(entries.map { $0.date })
     }
 
-    func previousMonth(familyId: String) async {
+    func previousMonth(familyId: String, inviteCode: String) async {
         if currentMonth == 1 { currentMonth = 12; currentYear -= 1 }
         else { currentMonth -= 1 }
-        await loadMonth(familyId: familyId)
+        await loadMonth(familyId: familyId, inviteCode: inviteCode)
     }
 
-    func nextMonth(familyId: String) async {
+    func nextMonth(familyId: String, inviteCode: String) async {
         if currentMonth == 12 { currentMonth = 1; currentYear += 1 }
         else { currentMonth += 1 }
-        await loadMonth(familyId: familyId)
+        await loadMonth(familyId: familyId, inviteCode: inviteCode)
     }
 }
